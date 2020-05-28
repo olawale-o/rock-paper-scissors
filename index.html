@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+      const OPTIONS = ['rock', 'paper', 'scissors']
+      let win = 0
+      let loss  = 0;
+      let tie = 0
+      function computerPlay() {
+        let randomOption  = OPTIONS[Math.floor(Math.random() * OPTIONS.length)]
+        return randomOption
+      }
+      function declareWinner(win,loss) {
+        if(win < loss){
+          console.log("Computer wins")
+        } else if(win > loss) {
+          console.log("Player Wins")
+        }else{
+          console.log("It is a tie")
+        }
+      }
+
+    function playRound(playerSelection,computerSelection) {
+      let score = 0
+      let userSelection = playerSelection.toLowerCase().trim()
+      const computerSelect = computerSelection.toLowerCase()
+      if(userSelection === 'rock') {
+        //checks computer selection if player picks rock
+        if(computerSelection === 'rock'){
+          tie += 1
+          return "It is a tie rock cannot beat rock"
+        } else if (computerSelection === 'paper') {
+          loss += 1
+          return "You loose paper beats rock"
+        } else{
+          win += 1
+          return "You win rock  beat scissors"
+        }
+      }
+      if(userSelection === 'paper') {
+        //checks computer selection if player picks paper
+        if(computerSelection === 'rock'){
+          win += 1
+          return "You win paper beat rock"
+        } else if (computerSelection === 'paper') {
+          tie += 1
+          return "It is a tie paper cannot beat paper"
+        } else{
+          loss += 1
+          return "You loose scissors beat paper"
+        }
+      }
+      if(userSelection === 'scissors') {
+        //checks computer selection if player picks scissors
+        if(computerSelection === 'rock'){
+          loss += 1
+          return "You Loose rock beat scissors"
+        } else if (computerSelection === 'paper') {
+          win += 1
+          return "You win scissors beat paper"
+        } else{
+          tie += 1
+          return "It is a tie scissors cannot beat scissors"
+        }
+      }
+    }
+
+    function game() {
+      for (let i = 0; i < 5; i++) {
+        let userSelection = window.prompt("Rock, Scissors or Paper choose: ", "")
+        if( userSelection === null ){
+          console.log("Field cannot be left blank")
+          return;
+        } else{
+          if ( !OPTIONS.includes(userSelection.toLowerCase()) ) {
+            console.log('Wrong Selection')
+            return;
+          }
+        }
+        const computerSelection = computerPlay()
+        let roundText = playRound(userSelection,computerSelection)
+        console.log(roundText)
+      }
+
+      declareWinner(win,loss)
+
+    }
+
+    game()
+
+
+
+  </script>
+</html>
